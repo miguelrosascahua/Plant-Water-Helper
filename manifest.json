@@ -1,0 +1,9 @@
+{
+  "name": "Plant Water Helper",
+  "short_name": "Water Helper",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef7ee",
+  "theme_color": "#2f7d32",
+  "icons": []
+}

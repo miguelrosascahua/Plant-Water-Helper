@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plant Water Helper</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <h1>🌱 Plant Water Helper</h1>
+    <p class="subtitle">Check if you should water your plants today based on your local weather.</p>
+
+    <button id="checkBtn">Should I water today?</button>
+
+    <section id="result" class="card hidden">
+      <h2 id="recommendation"></h2>
+      <p id="details"></p>
+    </section>
+
+    <p class="note">
+      Tip: For best results, allow location access when your browser asks.
+    </p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
