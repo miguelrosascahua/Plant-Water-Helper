@@ -98,7 +98,7 @@ const plantResult = document.getElementById("plantResult");
 const plantName = document.getElementById("plantName");
 const plantDetails = document.getElementById("plantDetails");
 
-const PLANTNET_API_KEY = "PASTE_YOUR_API_KEY_HERE";
+const PLANTNET_API_KEY = "2b10AaK4yh5uGYuj9BiiL1M9oO";
 
 identifyBtn.addEventListener("click", async () => {
   const file = plantImage.files[0];
@@ -117,7 +117,7 @@ identifyBtn.addEventListener("click", async () => {
     formData.append("organs", "leaf");
 
     const response = await fetch(
-      `https://my-api.plantnet.org/v2/identify/all?api-key=${2b10AaK4yh5uGYuj9BiiL1M9oO}`,
+      `https://my-api.plantnet.org/v2/identify/all?api-key=${PLANTNET_API_KEY}`,
       {
         method: "POST",
         body: formData
