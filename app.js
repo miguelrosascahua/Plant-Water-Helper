@@ -87,3 +87,74 @@ function resetButton() {
   checkBtn.disabled = false;
   checkBtn.textContent = "Should I water today?";
 }
+
+
+
+
+
+const identifyBtn = document.getElementById("identifyBtn");
+const plantImage = document.getElementById("plantImage");
+const plantResult = document.getElementById("plantResult");
+const plantName = document.getElementById("plantName");
+const plantDetails = document.getElementById("plantDetails");
+
+const PLANTNET_API_KEY = "PASTE_YOUR_API_KEY_HERE";
+
+identifyBtn.addEventListener("click", async () => {
+  const file = plantImage.files[0];
+
+  if (!file) {
+    alert("Please select or take a plant photo first.");
+    return;
+  }
+
+  identifyBtn.disabled = true;
+  identifyBtn.textContent = "Identifying...";
+
+  try {
+    const formData = new FormData();
+    formData.append("images", file);
+    formData.append("organs", "leaf");
+
+    const response = await fetch(
+      `https://my-api.plantnet.org/v2/identify/all?api-key=${2b10AaK4yh5uGYuj9BiiL1M9oO}`,
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const data = await response.json();
+
+    if (!data.results || data.results.length === 0) {
+      showPlantResult("No plant found", "Try another photo with better lighting.");
+      return;
+    }
+
+    const bestMatch = data.results[0];
+    const commonName =
+      bestMatch.species.commonNames && bestMatch.species.commonNames.length > 0
+        ? bestMatch.species.commonNames[0]
+        : "No common name available";
+
+    const scientificName = bestMatch.species.scientificNameWithoutAuthor;
+    const score = Math.round(bestMatch.score * 100);
+
+    showPlantResult(
+      commonName,
+      `Scientific name: ${scientificName}. Confidence: ${score}%.`
+    );
+  } catch (error) {
+    showPlantResult("Error", "Could not identify the plant. Please try again.");
+  }
+
+  identifyBtn.disabled = false;
+  identifyBtn.textContent = "Identify Plant";
+});
+
+function showPlantResult(title, message) {
+  plantName.textContent = title;
+  plantDetails.textContent = message;
+  plantResult.classList.remove("hidden");
+}
+
